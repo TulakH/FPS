@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace FPS_Shooter.Assets.Scripts.Movement
 {
-    public class JumpMovement : IMovementModifier
+    public class JumpMovement : MonoBehaviour, IMovementModifier
     {
         public Vector3 Value => throw new NotImplementedException();
 

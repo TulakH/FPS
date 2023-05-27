@@ -13,11 +13,13 @@ namespace FPS_Shooter.Assets.Scripts.Movement
     {
 
         [SerializeField]
-        private float _speed;
-
-        private IMovementControls _movementControls;
+        private float _speed = 5;
+        [SerializeField]
         private CharacterMovement _characterMovement;
 
+        private IMovementControls _movementControls;
+        
+        
         public Vector3 Value {get; private set;}
 
         private Vector2 _walkedControl; 
@@ -28,19 +30,7 @@ namespace FPS_Shooter.Assets.Scripts.Movement
             _movementControls = GetComponent<IMovementControls>();
             _movementControls.OnWalk += walkedControl;
         }
-
-        private void walkedControl(InputAction.CallbackContext eventArg)
-        {
-            _walkedControl = eventArg.ReadValue<Vector2>();
-        }
-
-        private void calculateWalkingMovement()
-        {
-            Value = _characterMovement.Transform.right * _walkedControl.x + _characterMovement.Transform.forward * _walkedControl.y;
-            Value *= _speed* Time.deltaTime;
-            _walkedControl = Vector2.zero;
-        }
-
+        
         public void FixedUpdate()
         {
             calculateWalkingMovement();
@@ -55,5 +45,20 @@ namespace FPS_Shooter.Assets.Scripts.Movement
         {
             _characterMovement.AddMovementModifier(this);
         }
+        
+        private void walkedControl(InputAction.CallbackContext eventArg)
+        {
+            _walkedControl = eventArg.ReadValue<Vector2>();
+        }
+
+        private void calculateWalkingMovement()
+        {
+            Value = _characterMovement.Transform.right * _walkedControl.x + _characterMovement.Transform.forward * _walkedControl.y;
+            Value *= _speed* Time.deltaTime;
+            Debug.Log(Value);
+            _walkedControl = Vector2.zero;
+        }
+
+        
     }
 }

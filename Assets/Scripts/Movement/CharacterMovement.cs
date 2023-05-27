@@ -22,7 +22,7 @@ namespace FPS_Shooter.Assets.Scripts.Movement
         private void Awake()
         {
             _rigidbody = GetComponentInChildren<Rigidbody>();
-            _groundChecker = GetComponent<GroundChecker>();
+            _groundChecker = GetComponentInChildren<GroundChecker>();
             
             Transform = GetComponent<Transform>();
         }
@@ -36,6 +36,7 @@ namespace FPS_Shooter.Assets.Scripts.Movement
         {
             foreach (var modifier in _movementModifiers)
             {
+                Debug.Log($"{modifier.GetType().FullName} force : {modifier.Value}");
                 _rigidbody.AddForce(modifier.Value);
             }
         }

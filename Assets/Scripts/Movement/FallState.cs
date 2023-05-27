@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FPS_Shooter.Assets.Scripts.Abstraction;
+using UnityEngine;
 
 namespace FPS_Shooter.Assets.Scripts.Movement
 {
-    public class FallState : IState
+    public class FallState : MonoBehaviour, IState
     {
         public Enum DefinitionState => MovementState.Falling;
 

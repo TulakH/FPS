@@ -7,13 +7,20 @@ namespace FPS_Shooter.Assets.Scripts.Control
 {
     public class FpsPlayerControls : MonoBehaviour, IMovementControls
     {
-        private readonly FPSControls _fpsControls = new FPSControls();
+        private FPSControls _fpsControls;
+
+        private void Awake()
+        {
+            _fpsControls = new FPSControls();
+        }
 
         public event Action<InputAction.CallbackContext> OnWalk 
         {
+            
             add 
             {
                 _fpsControls.Player.Move.performed += value;
+                
             }
             remove
             {
