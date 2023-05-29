@@ -19,12 +19,12 @@ namespace FPS_Shooter.Assets.Scripts.Movement
             throw new NotImplementedException();
         }
 
-        public void OnDisable()
+        public void DisableModifier()
         {
             throw new NotImplementedException();
         }
 
-        public void OnEnable()
+        public void EnableModifier()
         {
             throw new NotImplementedException();
         }

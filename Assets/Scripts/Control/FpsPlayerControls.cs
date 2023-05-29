@@ -1,34 +1,28 @@
 using System;
 using FPS_Shooter.Assets.Scripts.Control.Abstraction;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace FPS_Shooter.Assets.Scripts.Control
 {
     public class FpsPlayerControls : MonoBehaviour, IMovementControls
     {
+        
         private FPSControls _fpsControls;
+        public Vector2 Walk { get; private set; }
+        public Vector2 Rotation { get; private set; }
 
         private void Awake()
         {
             _fpsControls = new FPSControls();
         }
 
-        public event Action<InputAction.CallbackContext> OnWalk 
+        private void Update()
         {
-            
-            add 
-            {
-                _fpsControls.Player.Move.performed += value;
-                
-            }
-            remove
-            {
-                _fpsControls.Player.Move.performed -= value;
-            }
+            Walk = _fpsControls.Player.Move.ReadValue<Vector2>();
+            Rotation = _fpsControls.Player.Look.ReadValue<Vector2>();
         }
         
-        public event Action<InputAction.CallbackContext> Jumped
+        public event Action Jumped
         {
             add 
             {
@@ -39,19 +33,7 @@ namespace FPS_Shooter.Assets.Scripts.Control
                 //_fpsControls.Player.Jump.performed -= value;
             }
         }
-        
-        public event Action<InputAction.CallbackContext> OnMouseChanged
-        {
-            add 
-            {
-                _fpsControls.Player.Look.performed += value;
-            }
-            remove
-            {
-                _fpsControls.Player.Look.performed -= value;
-            }
-        }
-        
+
 
         private void OnEnable()
         {
@@ -62,6 +44,6 @@ namespace FPS_Shooter.Assets.Scripts.Control
         {
             _fpsControls.Player.Disable();
         }
-
+        
     }
 }

@@ -9,8 +9,10 @@ namespace FPS_Shooter.Assets.Scripts.Control.Abstraction
 {
     public interface IMovementControls
     {
-        event Action<InputAction.CallbackContext> OnWalk;
-        event Action<InputAction.CallbackContext> Jumped;
-        event Action<InputAction.CallbackContext> OnMouseChanged;
+        public Vector2 Walk { get; }
+        public Vector2 Rotation { get; }
+        event Action Jumped;
+        
+        //event Action<InputAction.CallbackContext> OnMouseChanged;
     }
 }

@@ -8,8 +8,8 @@ namespace FPS_Shooter.Assets.Scripts.Movement.Abstraction
 {
     public interface IMovementModifier
     {
-        void OnEnable();
-        void OnDisable();
+        void EnableModifier();
+        void DisableModifier();
         Vector3 Value { get; }
     }
 }

@@ -14,13 +14,14 @@ namespace UnityGui
                 
                 EditorGUI.BeginProperty(position, label, property);
 
-                property.objectReferenceValue = 
-                    EditorGUI.ObjectField(
-                        position,
-                        label,
-                        property.objectReferenceValue,
-                        requiredAttribute.RequiredType,
-                        true);
+                if (requiredAttribute != null)
+                    property.objectReferenceValue =
+                        EditorGUI.ObjectField(
+                            position,
+                            label,
+                            property.objectReferenceValue,
+                            requiredAttribute.RequiredType,
+                            true);
                 EditorGUI.EndProperty();
             }
             else

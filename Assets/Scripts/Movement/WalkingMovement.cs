@@ -22,13 +22,12 @@ namespace FPS_Shooter.Assets.Scripts.Movement
         
         public Vector3 Value {get; private set;}
 
-        private Vector2 _walkedControl; 
+        private Vector2 _walkedControl;
 
         private void Start()
         {
             _characterMovement = GetComponent<CharacterMovement>();
             _movementControls = GetComponent<IMovementControls>();
-            _movementControls.OnWalk += walkedControl;
         }
         
         public void FixedUpdate()
@@ -36,27 +35,28 @@ namespace FPS_Shooter.Assets.Scripts.Movement
             calculateWalkingMovement();
         }
 
-        public void OnDisable()
+        public void DisableModifier()
         {
             _characterMovement.RemoveMovementModifier(this);
         }
 
-        public void OnEnable()
+        public void EnableModifier()
         {
             _characterMovement.AddMovementModifier(this);
         }
         
-        private void walkedControl(InputAction.CallbackContext eventArg)
+        private void walkedControl(Vector2 wasd)
         {
-            _walkedControl = eventArg.ReadValue<Vector2>();
+            _walkedControl = wasd;
+            Debug.Log(_walkedControl);
         }
 
         private void calculateWalkingMovement()
         {
-            Value = _characterMovement.Transform.right * _walkedControl.x + _characterMovement.Transform.forward * _walkedControl.y;
-            Value *= _speed* Time.deltaTime;
+            Value = _characterMovement.Transform.right * _movementControls.Walk.x +
+                    _characterMovement.Transform.forward * _movementControls.Walk.y;
+            Value *= _speed * 50;
             Debug.Log(Value);
-            _walkedControl = Vector2.zero;
         }
 
         
